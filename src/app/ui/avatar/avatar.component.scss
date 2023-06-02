@@ -1,0 +1,25 @@
+:host {
+  &.circle {
+    & > div {
+      display: inline-block;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin: 0 auto;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &.rounded {
+    & > div {
+      display: inline-block;
+      border-radius: var(--border-radius-md);
+      background-color: #ccc;
+      margin: 0 auto;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

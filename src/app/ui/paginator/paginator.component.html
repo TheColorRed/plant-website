@@ -1,0 +1,73 @@
+<div *ngIf="{ page: page$ | async, route: route$ | async } as pageData" class="paginator">
+  <div *ngIf="showPages && pageData.page">
+    <p>
+      Page <b>{{ pageData.page.currentPage }}</b> of <b>{{ pageData.page.totalPages }}</b>
+    </p>
+  </div>
+  <div class="pages" *ngIf="pageData.page as page">
+    <div class="page-group">
+      <a
+        *ngIf="!page.isFirstPage"
+        ui-link
+        [routerLink]="[]"
+        [queryParams]="{ page: page.currentPage - 1, type: 'prev' }"
+        queryParamsHandling="merge"
+        tooltip="First Page"
+        position="above"
+      >
+        <fa-duotone-icon
+          size="2x"
+          [icon]="['fad', 'left-to-line']"
+          primaryColor="var(--color-secondary)"
+          secondaryColor="var(--color-primary)"
+          primaryOpacity="1"
+          secondaryOpacity="1"
+        />
+        <span>Prev</span>
+      </a>
+      <span *ngIf="page.isFirstPage">
+        <fa-duotone-icon
+          size="2x"
+          [icon]="['fad', 'left-to-line']"
+          primaryColor="var(--color-disabled)"
+          secondaryColor="var(--color-disabled)"
+          primaryOpacity="1"
+          secondaryOpacity="1"
+        />
+        <span>Prev</span>
+      </span>
+    </div>
+    <div class="page-group">
+      <a
+        *ngIf="!page.isLastPage"
+        ui-link
+        [routerLink]="[]"
+        [queryParams]="{ page: page.currentPage + 1, type: 'next' }"
+        queryParamsHandling="merge"
+        tooltip="Last Page"
+        position="above"
+      >
+        <span>Next</span>
+        <fa-duotone-icon
+          size="2x"
+          [icon]="['fad', 'right-to-line']"
+          primaryColor="var(--color-secondary)"
+          secondaryColor="var(--color-primary)"
+          primaryOpacity="1"
+          secondaryOpacity="1"
+        />
+      </a>
+      <span *ngIf="page.isLastPage">
+        <span>Next</span>
+        <fa-duotone-icon
+          size="2x"
+          [icon]="['fad', 'right-to-line']"
+          primaryColor="var(--color-disabled)"
+          secondaryColor="var(--color-disabled)"
+          primaryOpacity="1"
+          secondaryOpacity="1"
+        />
+      </span>
+    </div>
+  </div>
+</div>

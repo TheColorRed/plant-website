@@ -1,0 +1,60 @@
+@mixin button-icon-size($size, $amount) {
+  &.button-size-#{$size} {
+    font-size: #{$amount * 0.5};
+    line-height: 1;
+    width: #{$amount};
+    height: #{$amount};
+  }
+}
+
+@mixin button-size($size, $amount) {
+  &.button-size-#{$size} {
+    font-size: #{$amount * 0.5};
+    line-height: 1;
+  }
+}
+
+:host {
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  border-radius: var(--border-radius-sm);
+  padding: var(--gap-md) var(--gap-lg);
+  box-sizing: border-box;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  text-decoration: none;
+  font-weight: normal;
+
+  &:focus-visible {
+    outline: var(--color-outline) solid 2px;
+  }
+  @include button-size('sm', 1rem);
+  @include button-size('md', 2rem);
+  @include button-size('lg', 3rem);
+
+  &:hover {
+    background-color: var(--color-primary-alt);
+  }
+
+  &:disabled {
+    background-color: var(--color-primary-disabled);
+    color: var(--color-secondary-disabled);
+    cursor: not-allowed;
+  }
+
+  &.button-icon {
+    border-radius: 50%;
+    font-size: 1.2rem;
+    flex: 0 0 auto;
+    @include button-icon-size('sm', 1rem);
+    @include button-icon-size('md', 2rem);
+    @include button-icon-size('lg', 3rem);
+  }
+
+  &.transparent-button {
+    background-color: transparent;
+  }
+}

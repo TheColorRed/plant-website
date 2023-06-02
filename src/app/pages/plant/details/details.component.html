@@ -1,0 +1,42 @@
+<div *ngIf="{ plant: plant$ | async, tab: tab$ | async, companion: companionPlants$ | async } as plantDetails">
+  <ng-container *ngIf="(plantDetails.plant?.id ?? 0 > 0) && plantDetails.plant as details">
+    <div *ngIf="details.plant_info ?? {} as info">
+      <h1>{{ details.common_name | titlecase }}</h1>
+      <div class="details">
+        <div class="side">
+          <ui-side-nav>
+            <a ui-side-nav-item [routerLink]="[]" [queryParams]="{ tab: 'details' }">Details</a>
+            <a ui-side-nav-item [routerLink]="[]" [queryParams]="{ tab: 'photos' }">Photos</a>
+            <a ui-side-nav-item [routerLink]="[]" [queryParams]="{ tab: 'companion-plants' }">Companion Plants</a>
+          </ui-side-nav>
+          <a ui-link [routerLink]="['/admin/plant', details.id]">Edit</a>
+        </div>
+        <div class="content">
+          <div [ngSwitch]="plantDetails.tab">
+            <div *ngSwitchCase="'details'">
+              <ui-card>
+                <h3 ui-card-title>Details</h3>
+                <div ui-card-content>
+                  <markdown [data]="info.description" />
+                </div>
+              </ui-card>
+            </div>
+            <div *ngSwitchCase="'photos'"></div>
+            <div *ngSwitchCase="'companion-plants'">
+              <ui-card *ngFor="let plant of plantDetails.companion">
+                <h3 ui-card-title>
+                  <a ui-link [routerLink]="['/plants/details', plant.plant.id, plant.plant.common_name | slug]">
+                    {{ plant.plant.common_name | titlecase }}
+                  </a>
+                </h3>
+                <div ui-card-content>
+                  <markdown [data]="plant.plant.plant_info?.description ?? ''" />
+                </div>
+              </ui-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

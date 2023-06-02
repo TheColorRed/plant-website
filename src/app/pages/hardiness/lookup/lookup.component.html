@@ -1,0 +1,44 @@
+<ng-container *ngIf="{ search: locationResults$ | async } as results">
+  <form [formGroup]="group">
+    <div class="location-lookup">
+      <ui-search formControlName="search" placeholder="Search" (ngModelChange)="search($event)" />
+      <button ui-button-icon size="lg" title="Clear Search" (click)="getLocation()">
+        <fa-icon [icon]="['fass', 'location-dot']" [fixedWidth]="true" />
+      </button>
+    </div>
+  </form>
+
+  <div>
+    <ui-loading *ngIf="loading" />
+  </div>
+
+  <div class="results">
+    <table>
+      <thead>
+        <tr class="headers">
+          <th>Zone</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="results.search && results.search.length === 0">
+          <td colspan="5" class="no-results">No Results Found, Try Another Search.</td>
+        </tr>
+        <tr class="row" *ngFor="let result of results.search">
+          <td>{{ result.zone }}</td>
+          <td>{{ result.city | titlecase }}</td>
+          <td>{{ result.state }}</td>
+          <td>{{ result.zip }}</td>
+          <td class="actions">
+            <button ui-button-icon title="Set As My Location" (click)="setLocation(result)">
+              <fa-icon [icon]="['fass', 'crosshairs']" [fixedWidth]="true" />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>

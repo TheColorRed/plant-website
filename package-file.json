@@ -1,0 +1,4 @@
+{
+  "@hasura-query-builder/angular": "file:../hasura-query-builder/packages/angular/dist/hasura-query-builder",
+  "@hasura-query-builder/core": "file:../hasura-query-builder/packages/core"
+}

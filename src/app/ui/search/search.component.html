@@ -1,0 +1,6 @@
+<div *ngIf="{ search: search$ | async } as bind">
+  <input class="search" type="text" [placeholder]="placeholder" [value]="value" (input)="input($event)" />
+  <button ui-transparent-button>
+    <fa-icon [icon]="['fass', 'magnifying-glass']" [fixedWidth]="true" size="2x" />
+  </button>
+</div>

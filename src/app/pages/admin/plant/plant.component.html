@@ -1,0 +1,44 @@
+<div *ngIf="plant$ | async as plant">
+  <ng-container *ngIf="plant">
+    {{ plant | log }}
+    <h1 class="page-title">
+      <span>
+        {{ plant.common_name | titlecase }}
+      </span>
+      <span>
+        <a ui-button [routerLink]="['/plants/details', plant.id, plant.common_name | slug]"> Go to Plant </a>
+      </span>
+    </h1>
+    <form [formGroup]="group" #form="ngForm" class="form">
+      <section>
+        <ui-card>
+          <h2 ui-card-title>Description</h2>
+          <div ui-card-content>
+            <textarea formControlName="description" ui-input cdkTextareaAutosize></textarea>
+          </div>
+        </ui-card>
+      </section>
+      <section *ngIf="companionPlants$ | async" class="companions">
+        <ui-card>
+          <h2 ui-card-title class="title">
+            <span>Companion Plants</span>
+            <button ui-button-icon (click)="addCompanionPlant()">
+              <fa-icon [icon]="['fass', 'plus']"></fa-icon>
+            </button>
+          </h2>
+          <div ui-card-content arrow-group orientation="horizontal" class="content" *ngIf="group.controls.companions.value as companions">
+            <div *ngIf="companions.length === 0">No companion plants listed yet.</div>
+            <div *ngFor="let comp of companions">
+              <a ui-button [routerLink]="['/admin/plant', comp.id]" arrow-item>
+                {{ comp.name | titlecase }}
+              </a>
+            </div>
+          </div>
+        </ui-card>
+      </section>
+      <section class="actions">
+        <button ui-button [disabled]="!form.dirty" (click)="save()">Save</button>
+      </section>
+    </form>
+  </ng-container>
+</div>

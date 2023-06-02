@@ -1,0 +1,11 @@
+:host {
+  color: var(--color-secondary);
+  text-decoration: none;
+  display: inline-block;
+
+  &:focus-visible {
+    outline: var(--color-outline) solid 2px;
+    outline-offset: 2px;
+    outline-style: auto;
+  }
+}

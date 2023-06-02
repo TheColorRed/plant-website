@@ -1,0 +1,48 @@
+.location-lookup {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  place-content: center;
+  gap: var(--gap-lg);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .headers {
+    padding: 0.5rem;
+    text-align: center;
+    th:not(:last-child) {
+      text-align: left;
+      padding: 0.5rem;
+    }
+  }
+  .no-results {
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  .row {
+    & > td {
+      padding: 0.5rem;
+    }
+    place-items: center;
+    &:hover {
+      // background-color: rgba(0, 0, 0, 0.2);
+      background-color: var(--color-tertiary);
+    }
+    &:nth-child(even):not(:hover) {
+      background-color: rgba(200, 200, 200, 0.5);
+    }
+  }
+  .actions {
+    display: flex;
+    place-items: center;
+    place-content: center;
+  }
+}

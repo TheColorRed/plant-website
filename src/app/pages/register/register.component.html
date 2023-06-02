@@ -1,0 +1,33 @@
+<form [formGroup]="registrationForm" *ngIf="{ registration: registration$ | async, checkEmail: checkEmail$ | async } as result">
+  <div>
+    <div>
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName" autocomplete="given-name" />
+    </div>
+    <div>
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName" autocomplete="family-name" />
+    </div>
+    <div>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" formControlName="email" autocomplete="email" (input)="checkEmail()" />
+      <div *ngIf="result.checkEmail?.msg">{{ result.checkEmail?.msg }}</div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" autocomplete="new-password" />
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" autocomplete="new-password" />
+    </div>
+    <div class="actions">
+      <button type="submit" [disabled]="registrationForm.invalid" (click)="register()">Register</button>
+      <a ui-link routerLink="/login">Login</a>
+      <a ui-link routerLink="/">Home</a>
+    </div>
+    <div>
+      <!-- {{ result.registration?.msg }} -->
+    </div>
+  </div>
+</form>

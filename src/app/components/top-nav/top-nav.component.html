@@ -1,0 +1,14 @@
+<div>
+  <div>
+    <a ui-link routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">Home</a>
+    <a ui-link routerLink="/plants" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">Plants</a>
+    <a ui-link routerLink="/vendors" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">Vendors</a>
+    <a ui-link routerLink="/hardiness" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">Hardiness Zones</a>
+  </div>
+  <div *ngIf="location$ | async as location" class="location">
+    <span class="position">{{ location.city | titlecase }}, {{ location.state_short }}</span>
+    <span class="change">
+      <a ui-link routerLink="/hardiness" routerLinkActive="active">Change</a>
+    </span>
+  </div>
+</div>

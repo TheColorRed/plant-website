@@ -1,0 +1,62 @@
+.results {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .loading-container {
+    display: flex;
+    place-content: center;
+  }
+  .card-content {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-lg);
+    .header {
+      display: flex;
+      flex-direction: row;
+      place-content: space-between;
+      place-items: center;
+      flex: 0;
+      h2 {
+        margin: 0;
+      }
+      .private-public {
+        color: var(--color-secondary-alt);
+        font-weight: bold;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .contact {
+        padding-top: var(--gap-lg);
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        & > div {
+          display: flex;
+          flex-direction: row;
+          gap: var(--gap-md);
+          .hours {
+            display: flex;
+            flex-direction: row;
+          }
+        }
+        .hours-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--gap-sm);
+          & > div {
+            display: flex;
+            flex-direction: row;
+            .day {
+              width: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

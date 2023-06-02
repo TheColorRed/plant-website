@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat:wght@200;700&display=swap');
+@import '@angular/cdk/overlay-prebuilt.css';
+
+:root {
+  --color-primary: #2c2544;
+  --color-primary-disabled: #a4a4a7;
+  --color-primary-alt: #4e4079;
+  --color-secondary: #79c27b;
+  --color-secondary-disabled: #696d69;
+  --color-secondary-alt: #20c026;
+  --color-tertiary: #f8f1e3;
+  --color-outline: #0e67ec;
+  --color-error: #c60f8e;
+  --color-disabled: #b8b8b8;
+  --a: #90107f;
+  --b: #79c27b;
+  --c: #b8eac7;
+  --primary-font: 'Montserrat', sans-serif;
+  --secondary-font: 'Merriweather', serif;
+
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  --gap-sm: 4px;
+  --gap-md: 8px;
+  --gap-lg: 16px;
+  --gap-xl: 32px;
+
+  --box-shadow-sm: 0 0 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --box-shadow-md: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  --box-shadow-lg: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 8px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+body,
+html {
+  font-family: var(--primary-font);
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #1f2124;
+}
+body {
+  padding-bottom: 5rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+body * {
+  transform-style: preserve-3d;
+}

@@ -1,0 +1,11 @@
+{
+  "angular2-switcher.openSideBySide": true,
+  "[typescript]": {
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never"
+  },
+  "cSpell.words": [
+    "Crosshairs",
+    "fass"
+  ],
+}

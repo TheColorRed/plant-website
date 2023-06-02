@@ -1,0 +1,35 @@
+<ng-container *ngIf="{ search: search$ | async, page: page$ | async } as results">
+  <form [formGroup]="group">
+    <ui-search formControlName="plant" (ngModelChange)="search($event)" placeholder="Find a Plant"></ui-search>
+  </form>
+
+  <div class="loading" *ngIf="isLoading">
+    <ui-loading />
+  </div>
+
+  <div class="results" *ngIf="results.page as page">
+    <div class="results-header">
+      <ui-paginator *ngIf="page.totalResults ?? 0 > 0" [page]="page$" [paginator]="paginator" />
+    </div>
+    <div *ngIf="page.totalResults === 0" class="no-results">
+      <p>No results found.</p>
+    </div>
+    <ui-card *ngFor="let result of page.results">
+      <div ui-card-content>
+        <h2 [ngClass]="{ unknown: result.common_name === '' }">
+          <a ui-link [routerLink]="['/plants/details', result.id, result.common_name | slug]" [queryParams]="{ tab: 'details' }">
+            {{ result.common_name || 'Unknown' | titlecase }}
+          </a>
+        </h2>
+        <p>
+          {{ result.scientific_name | titlecase }}
+          &mdash;
+          {{ result.family | titlecase }}
+        </p>
+      </div>
+    </ui-card>
+    <ui-paginator *ngIf="page.totalResults ?? 0 > 0" [page]="page$" [paginator]="paginator" />
+  </div>
+</ng-container>
+
+<ng-template> </ng-template>

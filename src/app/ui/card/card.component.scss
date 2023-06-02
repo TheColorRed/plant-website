@@ -1,0 +1,15 @@
+:host {
+  & > .card {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-md);
+    background-color: #ffffff;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .card-content {
+      width: 100%;
+    }
+  }
+}

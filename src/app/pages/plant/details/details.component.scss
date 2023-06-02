@@ -1,0 +1,29 @@
+:host {
+  .details {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-lg);
+    flex: 1 1 100%;
+
+    .side {
+      display: flex;
+      flex: 1 0 300px;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .content {
+      width: 100%;
+      min-width: 420px;
+
+      markdown::ng-deep {
+        & > :first-child {
+          margin-top: 0;
+        }
+        & > :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

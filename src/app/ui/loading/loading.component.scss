@@ -1,0 +1,75 @@
+$height: 10px;
+$width: $height;
+$color: #f46e6e;
+$itemCount: 60;
+$degree: 360deg / $itemCount;
+$duration: 1s;
+
+:host {
+  display: inline-block;
+  .loading-container {
+    --degree: #{$degree};
+    display: inline-block;
+    background-color: #ffffff;
+    width: $width * 15;
+    height: $width * 15;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-md);
+
+    .container {
+      width: $height / 5;
+      height: $width / 5;
+      z-index: 100;
+
+      &:after {
+        position: absolute;
+        top: $width * 15 / 2;
+        left: $width * 15 / 2;
+        width: $height;
+        height: $height;
+        transform: translate(-50%, -50%);
+        background-color: $color;
+        border-radius: 50%;
+        content: '';
+      }
+    }
+
+    .item {
+      position: absolute;
+      top: ($width * 15 / 2) - 1px;
+      left: ($width * 15 / 2) - 1px;
+      width: 100%;
+      height: 100%;
+      backface-visibility: visible;
+      background-color: $color;
+
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        border-radius: 50%;
+        transform: rotateY(-90deg) translateZ($height / 2);
+        content: '';
+        backface-visibility: visible;
+      }
+    }
+
+    @for $i from 1 through $itemCount {
+      .item:nth-child(#{$i}) {
+        transform: rotateY(90deg) rotateX($i * $degree) translateZ($height);
+        animation: itemOffset#{$i} $duration ease-in-out infinite reverse;
+        animation-delay: ($i) * $duration/10;
+      }
+
+      @keyframes itemOffset#{$i} {
+        50% {
+          transform: rotateY(90deg) rotateX($i * $degree) translateZ($height * 6);
+          background-color: hsl(($i * $degree), 50, 50);
+        }
+      }
+    }
+  }
+}

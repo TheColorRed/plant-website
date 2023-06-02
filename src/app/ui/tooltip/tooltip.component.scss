@@ -1,0 +1,10 @@
+:host {
+  .tooltip {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    margin: var(--gap-sm);
+    box-shadow: var(--box-shadow-md);
+  }
+}

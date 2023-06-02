@@ -1,0 +1,16 @@
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  & > div {
+    & > label {
+      width: 150px;
+    }
+    display: flex;
+    flex-direction: row;
+  }
+}

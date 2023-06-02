@@ -1,0 +1,87 @@
+<ng-container *ngIf="{ search: searchResults$ | async } as results">
+  <form [formGroup]="group">
+    <ui-search formControlName="search" placeholder="Find a Vendor" (ngModelChange)="query($event)" (empty)="emptySearch()" />
+  </form>
+
+  <div class="results">
+    <div *ngIf="isLoading" class="loading-container">
+      <ui-loading></ui-loading>
+    </div>
+    <ng-container *ngIf="!isLoading">
+      <ui-card *ngIf="results.search?.length === 0">
+        <div ui-card-content class="card-content">
+          <div class="content">
+            <p>No Results Found.</p>
+          </div>
+        </div>
+      </ui-card>
+      <ui-card *ngFor="let item of results.search">
+        <div ui-card-content class="card-content">
+          <ui-avatar [url]="'/assets/img/' + item.avatar" shape="rounded" [size]="'128px'"></ui-avatar>
+          <div class="content">
+            <div class="header">
+              <h2>{{ item.name }}</h2>
+              <div class="private-public" position="left" tooltip="This vendor is {{ item.private ? 'Private Party' : 'Public' }}">
+                {{ item.private ? 'Private' : 'Public' }}
+              </div>
+            </div>
+            <div class="contact">
+              <div>
+                <a
+                  ui-link
+                  [attr.href]="item | contact : 'address' | google : 'directions'"
+                  target="_blank"
+                  tooltip="Navigate to {{ item.name }} with Google"
+                  position="right"
+                >
+                  <fa-icon [fixedWidth]="true" [icon]="['fass', 'map']" />
+                </a>
+                {{ item | contact : 'address' }}
+              </div>
+              <div *ngIf="item.website">
+                <a
+                  ui-link
+                  [attr.href]="item | contact : 'website'"
+                  target="_blank"
+                  tooltip="Go to {{ item.name }} Website"
+                  position="right"
+                >
+                  <fa-icon [fixedWidth]="true" [icon]="['fass', 'globe']"
+                /></a>
+                {{ item | contact : 'website' }}
+              </div>
+              <div *ngIf="item.phone">
+                <a ui-link href="tel:{{ item | contact : 'phone' }}" target="_blank" tooltip="Call {{ item.name }}" position="right">
+                  <fa-icon [fixedWidth]="true" [icon]="['fass', 'phone']"
+                /></a>
+                {{ item | contact : 'phone' }}
+              </div>
+              <div *ngIf="item.hours" #toggle="toggle" toggle-handle>
+                <fa-icon [fixedWidth]="true" [icon]="['fass', 'clock']" />
+                <div style="display: flex; flex-direction: column">
+                  <div class="hours">
+                    <span>{{ item | contact : 'hours-today' }}</span>
+                    <button
+                      ui-transparent-button
+                      (click)="toggle.toggle()"
+                      [tooltip]="!toggle.state ? 'Show all Hours for ' + item.name : 'Hide all Hours for ' + item.name"
+                      position="right"
+                    >
+                      <fa-icon [fixedWidth]="true" [icon]="['fas', toggle.state ? 'caret-up' : 'caret-down']" />
+                    </button>
+                  </div>
+                  <div class="hours-list" *ngIf="toggle.state">
+                    <div *ngFor="let day of item.hours | keyvalue | sortHours; index as idx" [ngClass]="{ bold: idx === currentDay }">
+                      <span class="day">{{ day.key | titlecase }}</span>
+                      <span class="hour-range">{{ day.value | hours }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui-card>
+    </ng-container>
+  </div>
+</ng-container>
